@@ -11,7 +11,7 @@ TODO discuss how to setup the workspace for these demos. Add a ros install file 
 
 ## Interface
 
-TODO write my notes on the interface, GetMotionPlan vs GetCartesianPath.
+See [doc/interface.md](doc/interface.md).
 
 ## Demo cases
 ### Case 1
