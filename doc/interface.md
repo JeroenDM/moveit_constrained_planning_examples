@@ -32,9 +32,9 @@ In `MotionPlanRequest`, there is another field related to constraints, but I'm n
 TrajectoryConstraints trajectory_constraints
 ```
 
-Besides `GetCartesianPath` and `MotionPlanRequest`, there is also the `MotionSequenceRequest`. This allows you to specify a list of `MotionPlanningRequest`. This is useful if we want to split up a Cartesian path in different primitive segments (line, circle arc, ...). This is how the[pilz_industrial_motion](https://github.com/PilzDE/pilz_industrial_motion) package uses this message.
+Besides `GetCartesianPath` and `MotionPlanRequest`, there is also the `MotionSequenceRequest`. This allows you to specify a list of `MotionPlanningRequest`. This is useful if we want to split up a Cartesian path in different primitive segments (line, circle arc, ...). This is how the [pilz_industrial_motion](https://github.com/PilzDE/pilz_industrial_motion) package uses this message.
 
-Both `GetCartesianPath` and `MotionPlanRequest` support a start state field in the response. This can come in handy as some tasks only specify the end-effector pose at the start, not the joint positions. These can then be chosen by the planner. The planner then becomes a **Generator* in the terminology used by the [MoveIt Task Constructor](https://ros-planning.github.io/moveit_tutorials/doc/moveit_task_constructor/moveit_task_constructor_tutorial.html)
+Both `GetCartesianPath` and `MotionPlanRequest` support a start state field in the response. This can come in handy as some tasks only specify the end-effector pose at the start, not the joint positions. These can then be chosen by the planner. The planner then becomes a **Generator** in the terminology used by the [MoveIt Task Constructor](https://ros-planning.github.io/moveit_tutorials/doc/moveit_task_constructor/moveit_task_constructor_tutorial.html)
 
 ### Discrete points vs continuous constrained region
 Some cases involve planning along under-constrained end-effector paths (case 2 and 3). The end-effector path is intuitively specified as a sequence of discrete poses. When the path is a line or circle segment, it is also easy to represent it analytically.
