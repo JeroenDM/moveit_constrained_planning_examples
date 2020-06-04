@@ -1,5 +1,7 @@
 ## Interface
 
+This document contains a summary of the things I learned about the existing MoveIt interfaces to specify constrained planning problems in general, and planning along under-constrained end-effector paths more specifically.
+
 ### GetMotionPlan vs GetCartesianPath
 
 Case 2 and 3 (see readme) are closely related to Cartesian path following. The simplest interface in MoveIt to describe this type of problem is the `GetCartesianPath` service. This service allows you to specify a list of waypoints and optionally add path constraints. The two relevant fields are shown below:
