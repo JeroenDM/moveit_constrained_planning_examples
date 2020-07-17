@@ -157,9 +157,25 @@ int main(int argc, char** argv)
   ocm.absolute_z_axis_tolerance = M_PI;
   ocm.weight = 1.0;
 
+  moveit_msgs::PositionConstraint pcm;
+  pcm.link_name = "panda_link7";
+  pcm.header.frame_id = "panda_link0";
+  shape_msgs::SolidPrimitive cbox;
+  cbox.type = cbox.BOX;
+  cbox.dimensions = {0.1, 0.5, 0.5};
+  pcm.constraint_region.primitives.push_back(cbox);
+  auto cbox_pose = geometry_msgs::Pose(target_pose1);
+  cbox_pose.position.y = 0.0;
+  cbox_pose.position.z = 0.4;
+  pcm.constraint_region.primitive_poses.push_back(cbox_pose);
+
+  visual_tools.publishCuboid(cbox_pose, cbox.dimensions[0], cbox.dimensions[1], cbox.dimensions[2], rvt::TRANSLUCENT_DARK);
+  visual_tools.trigger();
+
   // Now, set it as the path constraint for the group.
   moveit_msgs::Constraints test_constraints;
-  test_constraints.orientation_constraints.push_back(ocm);
+  // test_constraints.orientation_constraints.push_back(ocm);
+  test_constraints.position_constraints.push_back(pcm);
   move_group.setPathConstraints(test_constraints);
 
   moveit::core::RobotState start_state(*move_group.getCurrentState());
@@ -179,7 +195,7 @@ int main(int argc, char** argv)
   ROS_INFO_NAMED("tutorial", "Visualizing plan 3 (constraints) %s", success ? "" : "FAILED");
 
   // Visualize the plan in RViz
-  visual_tools.deleteAllMarkers();
+  // visual_tools.deleteAllMarkers();
   visual_tools.publishAxisLabeled(start_pose1, "start");
   visual_tools.publishAxisLabeled(target_pose1, "goal");
   visual_tools.publishText(text_pose, "Constrained Goal", rvt::WHITE, rvt::XLARGE);
