@@ -79,7 +79,8 @@ int main(int argc, char** argv)
 
   // Start the demo
   // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  // visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
+  // visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start
+  // the demo");
 
   // Adding/Removing Objects and Attaching/Detaching Objects
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -162,14 +163,15 @@ int main(int argc, char** argv)
   pcm.header.frame_id = "panda_link0";
   shape_msgs::SolidPrimitive cbox;
   cbox.type = cbox.BOX;
-  cbox.dimensions = {0.1, 0.5, 0.5};
+  cbox.dimensions = { 0.1, 0.5, 0.5 };
   pcm.constraint_region.primitives.push_back(cbox);
   auto cbox_pose = geometry_msgs::Pose(target_pose1);
   cbox_pose.position.y = 0.0;
   cbox_pose.position.z = 0.4;
   pcm.constraint_region.primitive_poses.push_back(cbox_pose);
 
-  visual_tools.publishCuboid(cbox_pose, cbox.dimensions[0], cbox.dimensions[1], cbox.dimensions[2], rvt::TRANSLUCENT_DARK);
+  visual_tools.publishCuboid(cbox_pose, cbox.dimensions[0], cbox.dimensions[1], cbox.dimensions[2],
+                             rvt::TRANSLUCENT_DARK);
   visual_tools.trigger();
 
   // Now, set it as the path constraint for the group.
@@ -186,8 +188,10 @@ int main(int argc, char** argv)
   // start state that we have just created.
   move_group.setPoseTarget(target_pose1);
 
-  // Planning with constraints can be slow because every sample must call an inverse kinematics solver.
-  // Lets increase the planning time from the default 5 seconds to be sure the planner has enough time to succeed.
+  // Planning with constraints can be slow because every sample must call an
+  // inverse kinematics solver.
+  // Lets increase the planning time from the default 5 seconds to be sure the
+  // planner has enough time to succeed.
   move_group.setPlanningTime(20.0);
 
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;
@@ -214,7 +218,8 @@ int main(int argc, char** argv)
   // planning_scene_interface.removeCollisionObjects(object_ids);
 
   // // Show text in RViz of status
-  // visual_tools.publishText(text_pose, "Object removed", rvt::WHITE, rvt::XLARGE);
+  // visual_tools.publishText(text_pose, "Object removed", rvt::WHITE,
+  // rvt::XLARGE);
   // visual_tools.trigger();
 
   // END_TUTORIAL
